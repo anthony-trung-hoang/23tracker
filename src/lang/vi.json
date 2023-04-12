@@ -1,0 +1,145 @@
+{
+   "lang": "vi",
+   "navTitle": {
+      "home": "Toàn cầu",
+      "vietnam": "Việt nam",
+      "about": "Về tôi"
+   },
+   "vietnamChart": 
+      {
+         "vietnamBarplot": "Biểu đồ Việt Nam",
+         "totalCases": "Tổng số ca",
+         "totalDeaths": "Tổng số người chết",
+         "totalRecovered": "Tổng số người hồi phục",
+         "newCases": "Số ca mới",
+         "newDeaths": "Số người chết mới",
+         "seriousCritical": "Nghiêm trọng",
+         "activeCases": "Số ca đang điều trị",
+         "totalCasesPer1M": "Tổng số ca trên 1 triệu dân"
+       }
+       ,
+       "worldChart": 
+       {
+         "worldBarplot": "Biểu đồ thế giới",
+         "totalCases": "Tổng số ca",
+         "totalDeaths": "Tổng số người chết",
+         "totalRecovered": "Tổng số người hồi phục",
+         "newCases": "Số ca mới",
+         "newDeaths": "Số người chết mới",
+         "seriousCritical": "Nghiêm trọng",
+         "activeCases": "Số ca đang điều trị",
+         "totalCasesPer1M": "Tổng số ca trên 1 triệu dân"
+       }
+       ,
+       "worldData": 
+       {
+         "worldData": "DỮ LIỆU THẾ GIỚI",
+         "lastUpdatedAt": "Cập nhật lần cuối lúc:",
+         "exportReport": "Xuất báo cáo thế giới",
+         "totalCases": "Tổng số ca nhiễm",
+         "newCases": "Số ca nhiễm mới",
+         "totalDeaths": "Tổng số ca tử vong",
+         "newDeaths": "Số ca tử vong mới",
+         "totalRecovered": "Tổng số ca hồi phục",
+         "activeCases": "Số ca đang điều trị",
+         "seriousCritical": "Số ca nặng",
+         "totalCasesPerMillion": "Tổng số ca nhiễm trên mỗi triệu dân",
+         "deathsPerMillion": "Số ca tử vong trên mỗi triệu dân",
+         "sheetExport": {
+            "sheetTitle": "Thế giới",
+            "titleCell": "Báo cáo thế giới",
+            "script1": "Dữ liệu này được lấy lúc ",
+            "script2": " và được tải xuống lúc ",
+            "desCell": "Bảng này chứa thông tin liên quan đến COVID-19 bao gồm: Số ca nhiễm đang hoạt động, Số ca tử vong trên mỗi triệu dân, Số ca mới, Số ca tử vong mới, Số ca nghiêm trọng, Tổng số ca nhiễm, Tổng số ca nhiễm trên mỗi triệu dân, Tổng số ca tử vong và Tổng số ca phục hồi. Dữ liệu trong bảng được cập nhật thường xuyên để cung cấp thông tin chính xác về tình hình toàn cầu của đại dịch. Thông tin này có thể được sử dụng để phân tích xu hướng và đưa ra quyết định thông minh liên quan đến du lịch, giãn cách xã hội và các biện pháp khác nhằm ngăn chặn sự lây lan của COVID-19. Bằng cách hiểu rõ dữ liệu trong bảng này, cá nhân và tổ chức có thể áp dụng các biện pháp phòng ngừa cần thiết để bảo vệ bản thân và người khác khỏi virus.",
+            "tableColumns":{
+               "totalCases": "Tổng số ca",
+               "totalDeaths": "Tổng số người chết",
+               "totalRecovered": "Tổng số người hồi phục",
+               "newCases": "Số ca mới",
+               "newDeaths": "Số người chết mới",
+               "seriousCritical": "Nghiêm trọng",
+               "activeCases": "Số ca đang điều trị",
+               "totalCasesPer1M": "Tổng số ca trên 1 triệu dân",
+               "totalDeathsPer1M": "Tổng số ca tử vong trên 1 triệu dân"
+            },
+            "chartCell": "Đồ thị này cho thấy số ca nhiễm và tử vong do Covid-19 trên toàn thế giới theo thời gian từ khi bùng phát đến ngày hôm nay."
+
+         }
+       },
+       "vietnamData": 
+       {
+         "vietnamData": "DỮ LIỆU VIỆT NAM",
+         "lastUpdatedAt": "Cập nhật lần cuối lúc:",
+         "exportReport": "Xuất báo cáo Việt Nam",
+         "totalCases": "Tổng số ca nhiễm",
+         "newCases": "Số ca nhiễm mới",
+         "totalDeaths": "Tổng số ca tử vong",
+         "newDeaths": "Số ca tử vong mới",
+         "totalRecovered": "Tổng số ca hồi phục",
+         "activeCases": "Số ca đang điều trị",
+         "seriousCritical": "Số ca nguy kịch",
+         "totalCasesPerMillion": "Tổng số ca nhiễm trên mỗi triệu dân",
+         "deathsPerMillion": "Số ca tử vong trên mỗi triệu dân",
+         "sheetExport": {
+            "sheetTitle": "Việt Nam",
+            "titleCell": "Báo cáo Việt Nam",
+            "script1": "Dữ liệu này được lấy lúc ",
+            "script2": " và được tải xuống lúc ",
+            "desCell": "Dữ liệu này cung cấp thông tin về tình hình COVID-19 tại Việt Nam, bao gồm số ca nhiễm, tử vong và số ca đang điều trị. Ngoài ra, dữ liệu cũng bao gồm thông tin về số người đã phục hồi và các yếu tố liên quan đến sự lây lan của virus, chẳng hạn như số ca nặng và mới. Dữ liệu cũng bao gồm thông tin về số lần xét nghiệm được thực hiện và số ca và tử vong trên mỗi triệu dân. Tất cả thông tin này giúp cho các quan chức chính phủ và chuyên gia y tế có cái nhìn tổng quan về tình hình COVID-19 tại Việt Nam và đưa ra các quyết định phù hợp để kiểm soát và ngăn chặn sự lây lan của virus.",
+            "tableColumns":{
+               "totalCases": "Tổng số ca",
+               "totalDeaths": "Tổng số người chết",
+               "totalRecovered": "Tổng số người hồi phục",
+               "newCases": "Số ca mới",
+               "newDeaths": "Số người chết mới",
+               "seriousCritical": "Nghiêm trọng",
+               "activeCases": "Số ca đang điều trị",
+               "totalCasesPer1M": "Tổng số ca trên 1 triệu dân",
+               "totalDeathsPer1M": "Tổng số ca tử vong trên 1 triệu dân"
+            },
+            "chartCell": "Đồ thị này cho thấy số ca nhiễm và tử vong do Covid-19 tại Việt Nam theo thời gian từ khi bùng phát đến ngày hôm nay."
+
+         }
+       },
+       "countriesStats": {
+         "countriesTable": {
+            "title": "Thống kê quốc gia",
+            "searchPlaceHolder": "Tìm kiếm tên quốc gia",
+            "searchButton": "Tìm",
+            "resetButton": "Đặt lại",
+            "downloadExcelButton": "Tải xuống báo cáo",
+            "details": "Chi tiết",
+            "columnTitle": {
+               "name": "Tên",
+               "cases": "Số ca",
+               "deaths": "Số người chết",
+               "recovered": "Số người hồi phục",
+               "newDeaths": "Số người chết mới",
+               "newCases": "Số ca mới",
+               "critical": "Nguy kịch",
+               "active": "Đang điều trị",
+               "tests": "Tổng số xét nghiệm",
+               "actions": "Hành động"
+            }
+         },
+         "sheetExport": {
+            "script1": "Dữ liệu này được lấy lúc ",
+            "script2": " và được tải xuống lúc ",
+            "desCell": "Dữ liệu này cung cấp thông tin về tình hình COVID-19 của nước sở tại, bao gồm số ca nhiễm, tử vong và số ca đang điều trị. Ngoài ra, dữ liệu cũng bao gồm thông tin về số người đã phục hồi và các yếu tố liên quan đến sự lây lan của virus, chẳng hạn như số ca nặng và mới. Dữ liệu cũng bao gồm thông tin về số lần xét nghiệm được thực hiện và số ca và tử vong trên mỗi triệu dân. Tất cả thông tin này giúp cho các quan chức chính phủ và chuyên gia y tế có cái nhìn tổng quan về tình hình COVID-19 đang diễn ra và đưa ra các quyết định phù hợp để kiểm soát và ngăn chặn sự lây lan của virus.",
+            "tableColumns":{
+               "totalCases": "Tổng số ca",
+               "totalDeaths": "Tổng số người chết",
+               "totalRecovered": "Tổng số người hồi phục",
+               "newCases": "Số ca mới",
+               "newDeaths": "Số người chết mới",
+               "seriousCritical": "Nghiêm trọng",
+               "activeCases": "Số ca đang điều trị",
+               "totalCasesPer1M": "Tổng số ca trên 1 triệu dân",
+               "totalDeathsPer1M": "Tổng số ca tử vong trên 1 triệu dân"
+            },
+            "chartCell": "Đồ thị này cho thấy số ca nhiễm và tử vong do Covid-19 theo thời gian từ khi bùng phát đến ngày hôm nay."
+
+         }
+       }
+       
+}
