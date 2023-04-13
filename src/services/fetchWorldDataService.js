@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const headers = {
-  "X-RapidAPI-Key": "671223b19fmsh5500a57e27e473fp1a850ejsnb9d5a49074e5",
-  "X-RapidAPI-Host": "corona-virus-world-and-india-data.p.rapidapi.com",
+  "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
+  "X-RapidAPI-Host": import.meta.env.VITE_RAPID_API_HOST,
 };
 
 const apiList = {
   getWorldStatistics: {
-    endpoint: "https://corona-virus-world-and-india-data.p.rapidapi.com/api",
+    endpoint: import.meta.env.VITE_RAPID_API_URL,
     method: "GET",
   },
 };
