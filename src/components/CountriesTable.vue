@@ -50,7 +50,7 @@
             style="width: 90px"
             @click="handleReset(clearFilters)"
           >
-            Reset
+            {{ t("countriesStats.countriesTable.resetButton") }}
           </a-button>
         </div>
       </template>
@@ -59,7 +59,9 @@
         <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
       </template>
 
-      <template #bodyCell="{ text, column }">
+      <!-- template of bodycell -->
+      <template #bodyCell="{ text, column, record }">
+        <!-- display searched data -->
         <span v-if="searchText && searchedColumn === column.dataIndex">
           <template
             v-for="(fragment, i) in text
@@ -76,9 +78,27 @@
             <template v-else>{{ fragment }}</template>
           </template>
         </span>
+
+        <template v-if="column.key === 'action'">
+          <span>
+            <a-button type="primary" @click="showModal(record)">{{
+              t("countriesStats.countriesTable.details")
+            }}</a-button>
+          </span>
+        </template>
       </template>
     </a-table>
   </div>
+
+  <a-modal
+    v-model:visible="visible"
+    :title="modalTitle"
+    :footer="null"
+    :maskClosable="true"
+    :maskStyle="{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }"
+  >
+    <ChartItem :chartData="chartData"></ChartItem>
+  </a-modal>
 </template>
 <script setup>
 import { SearchOutlined } from "@ant-design/icons-vue";
@@ -86,6 +106,7 @@ import { useI18n } from "vue-i18n";
 import { ref, watchEffect } from "vue";
 import { useWorldDataStore } from "../stores/worldData";
 import { computed } from "@vue/reactivity";
+import ChartItem from "./items/ChartItem.vue";
 
 function convertToNumber(str) {
   if (!str) return 0;
@@ -111,11 +132,68 @@ const data = ref([]);
 watchEffect(() => {
   data.value = computedDataForCountries.value;
 });
+// END DECLARING REACTIVE DATA FOR TABLE
 
 const searchText = ref("");
 const searchedColumn = ref("");
 const searchInput = ref();
 
+// FOR MODAL SHOW
+const modalRecord = ref({});
+const modalTitle = ref("");
+const visible = ref(false);
+const showModal = (record) => {
+  visible.value = true;
+  modalRecord.value = record;
+  modalTitle.value = record.country_name;
+};
+
+// initial data for chart data
+const chartData = ref({
+  labels: [
+    t("worldChart.totalCases"),
+    t("worldChart.totalDeaths"),
+    t("worldChart.totalRecovered"),
+    t("worldChart.newCases"),
+    t("worldChart.newDeaths"),
+  ],
+  datasets: [
+    {
+      data: [
+        convertToNumber(modalRecord.value.cases),
+        convertToNumber(modalRecord.value.deaths),
+        convertToNumber(modalRecord.value.total_recovered),
+        convertToNumber(modalRecord.value.new_cases),
+        convertToNumber(modalRecord.value.new_deaths),
+      ],
+    },
+  ],
+});
+
+watchEffect(() => {
+  chartData.value = {
+    labels: [
+      t("worldChart.totalCases"),
+      t("worldChart.totalDeaths"),
+      t("worldChart.totalRecovered"),
+      t("worldChart.newCases"),
+      t("worldChart.newDeaths"),
+    ],
+    datasets: [
+      {
+        data: [
+          convertToNumber(modalRecord.value.cases),
+          convertToNumber(modalRecord.value.deaths),
+          convertToNumber(modalRecord.value.total_recovered),
+          convertToNumber(modalRecord.value.new_cases),
+          convertToNumber(modalRecord.value.new_deaths),
+        ],
+      },
+    ],
+  };
+});
+
+// COLUMNS FOR TABLE
 const columns = computed(() => [
   {
     title: t("countriesStats.countriesTable.columnTitle.name"),
@@ -221,7 +299,14 @@ const columns = computed(() => [
 
     sortDirections: ["descend", "ascend"],
   },
+  {
+    title: t("countriesStats.countriesTable.columnTitle.actions"),
+    key: "action",
+    width: 110,
+  },
 ]);
+
+// Search and reset for table
 const handleSearch = (selectedKeys, confirm, dataIndex) => {
   confirm();
   searchText.value = selectedKeys[0];
