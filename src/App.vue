@@ -5,7 +5,7 @@
       <a-layout-header style="height: 48px">
         <!-- NAVBAR MENU -->
         <a-menu
-          v-model:selectedKeys="selectedKeys"
+          v-model:selectedKeys="currentSelectedKeys"
           theme="dark"
           mode="horizontal"
           :style="{ lineHeight: '48px', justifyContent: 'center' }"
@@ -87,16 +87,33 @@
 </template>
 <script setup>
 import { computed } from "@vue/reactivity";
-import { onMounted, ref } from "vue";
+import { onBeforeMount, onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useWorldDataStore } from "./stores/worldData";
+import { useRoute } from "vue-router";
 
 const { locale } = useI18n();
-const selectedKeys = ref(["1"]);
+const route = useRoute();
 const dataStore = useWorldDataStore();
 
 const currentLanguage = computed(() => {
   return locale.value;
+});
+
+const currentRoute = computed(() => {
+  return route.path;
+});
+
+const currentSelectedKeys = ref(["1"]);
+
+watch(currentRoute, () => {
+  if (currentRoute.value === "/") {
+    currentSelectedKeys.value = ["1"];
+  } else if (currentRoute.value === "/vietnam") {
+    currentSelectedKeys.value = ["2"];
+  } else if (currentRoute.value === "/about") {
+    currentSelectedKeys.value = ["3"];
+  }
 });
 
 function onClick({ key }) {
