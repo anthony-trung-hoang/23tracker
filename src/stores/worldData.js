@@ -23,13 +23,15 @@ export const useWorldDataStore = defineStore("world-data", () => {
       const response = await axios.get(apiList.getWorldStatistics.endpoint, {
         headers,
       });
+
+      // GET DATA FROM API
       const worldData = response.data.world_total;
       const countriesData = response.data.countries_stat;
-
       const vietnamData = countriesData.find(
         (country) => country.country_name === "Vietnam"
       );
 
+      // PUT THEM IN STORE
       worldStatistics.value = worldData;
       countriesStatistics.value = countriesData;
       vietNamStatistics.value = vietnamData;
