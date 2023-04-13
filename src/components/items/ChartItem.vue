@@ -18,7 +18,7 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
 
 ChartJS.register(
   Title,
@@ -33,7 +33,16 @@ const props = defineProps({
   chartData: Object,
 });
 
-const chartOptions = {
+const chartOptions = ref({
   responsive: true,
-};
+  maintainAspectRatio: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  layout: {
+    padding: 20,
+  },
+});
 </script>
