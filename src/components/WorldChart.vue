@@ -70,5 +70,10 @@ watchEffect(() => {
 </script>
 
 <template>
-  <ChartItem :chartData="chartData"></ChartItem>
+  <div style="background-color: #f0f8ff; padding: 12px">
+    <h2 style="font-size: 25px; padding: 6px 6px">
+      {{ t("worldChart.worldBarplot") }}
+    </h2>
+    <ChartItem :chartData="chartData"></ChartItem>
+  </div>
 </template>
