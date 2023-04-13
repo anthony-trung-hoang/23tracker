@@ -4,6 +4,7 @@ import { useWorldDataStore } from "../stores/worldData";
 import { useI18n } from "vue-i18n";
 import { ref, watchEffect } from "vue";
 import { computed } from "@vue/reactivity";
+import { exportExcel } from "../services/exportExcelService";
 
 const { t } = useI18n();
 const store = useWorldDataStore();
@@ -35,6 +36,10 @@ watchEffect(() => {
 watchEffect(() => {
   timeStamp.value = cardContent.value.statistic_taken_at;
 });
+
+function exportFile() {
+  exportExcel();
+}
 </script>
 
 <template>
@@ -47,7 +52,7 @@ watchEffect(() => {
     </h3>
 
     <!-- DOWNLOAD BUTTON HERE -->
-    <a-button type="primary" style="margin-bottom: 15px">
+    <a-button @click="exportFile" type="primary" style="margin-bottom: 15px">
       {{ t("worldData.exportReport") }}
     </a-button>
 
@@ -66,7 +71,7 @@ watchEffect(() => {
 <style scoped>
 h1,
 h3 {
-  color: black;
+  color: rgb(255, 255, 255);
   font-family: "Roboto";
 }
 </style>

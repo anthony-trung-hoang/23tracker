@@ -8,7 +8,12 @@ const props = defineProps({
 
 <template>
   <a-col :xs="24" :sm="12" :md="8">
-    <a-card :title="title" :bordered="false" style="margin-bottom: 10px">
+    <a-card
+      size="small"
+      :title="title"
+      :bordered="false"
+      style="margin-bottom: 10px"
+    >
       <p>{{ content }}</p>
     </a-card>
   </a-col>

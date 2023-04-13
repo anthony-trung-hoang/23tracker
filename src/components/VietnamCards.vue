@@ -67,7 +67,7 @@ watchEffect(() => {
 <style scoped>
 h1,
 h3 {
-  color: black;
+  color: rgb(255, 255, 255);
   font-family: "Roboto", sans-serif;
 }
 </style>

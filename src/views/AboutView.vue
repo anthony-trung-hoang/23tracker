@@ -26,6 +26,11 @@ export default {
 <style>
 .about {
   text-align: center;
+  color: white;
+}
+
+h1 {
+  color: white;
 }
 
 img {

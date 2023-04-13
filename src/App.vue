@@ -80,7 +80,7 @@
 
       <!-- FOOTER -->
       <a-layout-footer style="text-align: center" class="footer-wrapper">
-        <span>Ant Design ©2018 Created by Ant UED</span>
+        <span>Special thanks to myself</span>
       </a-layout-footer>
     </a-layout>
   </div>
@@ -154,7 +154,7 @@ onMounted(async () => {
 }
 
 .bg-wrapper {
-  background: url("https://images.unsplash.com/photo-1610005908273-cf9e5b615076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80")
+  background: url("https://images.unsplash.com/photo-1673024697368-947323b88951?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
     no-repeat;
   background-size: cover;
   background-position: center center;
