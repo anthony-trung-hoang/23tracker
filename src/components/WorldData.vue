@@ -1,9 +1,9 @@
 <script setup>
-import WorldCards from "../components/WorldCards.vue";
-import DataChart from "./items/ChartItem.vue";
+import WorldCards from "./WorldCards.vue";
+import WorldChart from "./WorldChart.vue";
 </script>
 
 <template>
   <WorldCards></WorldCards>
-  <DataChart></DataChart>
+  <WorldChart></WorldChart>
 </template>

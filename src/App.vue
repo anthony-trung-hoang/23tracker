@@ -14,6 +14,9 @@
             <RouterLink to="/">{{ $t("navTitle.home") }}</RouterLink>
           </a-menu-item>
           <a-menu-item key="2">
+            <RouterLink to="/vietnam">{{ $t("navTitle.vietnam") }}</RouterLink>
+          </a-menu-item>
+          <a-menu-item key="3">
             <RouterLink to="/about">{{ $t("navTitle.about") }}</RouterLink>
           </a-menu-item>
         </a-menu>
@@ -117,7 +120,7 @@ onMounted(async () => {
 </script>
 <style>
 #app {
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
