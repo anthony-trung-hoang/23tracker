@@ -10,7 +10,6 @@
       :data-source="data"
       :columns="columns"
       :scroll="{ x: 800, y: 300 }"
-      :pagination="{ pageSize: 50 }"
     >
       <template #headerCell="{ column }">
         <template v-if="column.key === 'name'">
