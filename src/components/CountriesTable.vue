@@ -74,7 +74,6 @@
               class="highlight"
             >
             </mark>
-            <template v-else>{{ fragment }}</template>
           </template>
         </span>
 
@@ -350,9 +349,3 @@ const handleReset = (clearFilters) => {
   searchText.value = "";
 };
 </script>
-<style scoped>
-.highlight {
-  background-color: rgb(105, 255, 255);
-  padding: 0px;
-}
-</style>
