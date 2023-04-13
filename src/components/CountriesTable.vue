@@ -61,6 +61,7 @@
       <!-- template of bodycell -->
       <template #bodyCell="{ text, column, record }">
         <!-- display searched data -->
+
         <span v-if="searchText && searchedColumn === column.dataIndex">
           <template
             v-for="(fragment, i) in text
@@ -72,7 +73,6 @@
               :key="i"
               class="highlight"
             >
-              {{ fragment }}
             </mark>
             <template v-else>{{ fragment }}</template>
           </template>
@@ -83,6 +83,17 @@
             <a-button type="primary" @click="showModal(record)">{{
               t("countriesStats.countriesTable.details")
             }}</a-button>
+          </span>
+        </template>
+
+        <template v-if="column.key === 'country_name'">
+          <span
+            style="margin-right: 2px"
+            :class="'fi fi-' + getCountryISOCode(record.country_name)"
+          >
+          </span>
+          <span>
+            {{ record.country_name }}
           </span>
         </template>
       </template>
@@ -106,12 +117,18 @@ import { ref, watchEffect } from "vue";
 import { useWorldDataStore } from "../stores/worldData";
 import { computed } from "@vue/reactivity";
 import ChartItem from "./items/ChartItem.vue";
+import flags from "../assets/flag";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 function convertToNumber(str) {
   if (!str) return 0;
   if (str === "N/A") return -1;
   str = str.replace(/,/g, "");
   return parseInt(str);
+}
+
+function getCountryISOCode(country_name) {
+  return flags[country_name].toLowerCase();
 }
 
 let compare = (a, b) => {
@@ -213,7 +230,7 @@ const columns = computed(() => [
     title: t("countriesStats.countriesTable.columnTitle.name"),
     dataIndex: "country_name",
     key: "country_name",
-    width: 110,
+    width: 130,
     customFilterDropdown: true,
     onFilter: (value, record) =>
       record.country_name
