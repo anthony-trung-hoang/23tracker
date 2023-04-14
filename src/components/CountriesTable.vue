@@ -3,7 +3,7 @@
     :key="$i18n.locale"
     style="background-color: aliceblue; margin-top: 12px; padding: 12px"
   >
-    <h2 style="font-size: 25px; margin-bottom: 0px; padding: 6px 6px">
+    <h2 style="font-size: 25px">
       {{ t("countriesStats.countriesTable.title") }}
     </h2>
     <a-table
