@@ -101,12 +101,16 @@
 
   <a-modal
     v-model:visible="visible"
+    style="text-align: center"
     :title="modalTitle"
     :footer="null"
     :maskClosable="true"
     :maskStyle="{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }"
   >
     <ChartItem :chartData="chartData"></ChartItem>
+    <a-button block type="primary" @click="exportFile">
+      {{ t("countriesStats.countriesTable.downloadExcelButton") }}
+    </a-button>
   </a-modal>
 </template>
 <script setup>
@@ -118,6 +122,7 @@ import { computed } from "@vue/reactivity";
 import ChartItem from "./items/ChartItem.vue";
 import flags from "../assets/flag";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
+import { exportExcel } from "../services/exportExcelService";
 
 function convertToNumber(str) {
   if (!str) return 0;
@@ -138,6 +143,13 @@ let compare = (a, b) => {
 
 const store = useWorldDataStore();
 const { t } = useI18n();
+
+// TIME WHEN STATS WAS TAKEN
+const timeStamp = ref("");
+const worldData = computed(() => store.worldStatistics);
+watchEffect(() => {
+  timeStamp.value = worldData.value.statistic_taken_at;
+});
 
 // REACTIVE DATA FOR TABLE
 const computedDataForCountries = computed(() => {
@@ -348,4 +360,52 @@ const handleReset = (clearFilters) => {
   });
   searchText.value = "";
 };
+
+// excel export (through button in the modal)
+
+function exportFile() {
+  let data = {
+    sheetTitle: `${modalRecord.value.country_name} sheet`,
+    titleCell: modalRecord.value.country_name,
+    script:
+      t("countriesStats.sheetExport.script1") +
+      timeStamp.value +
+      t("countriesStats.sheetExport.script2"),
+    desCell: t("countriesStats.sheetExport.desCell"),
+    columns: [
+      { name: t("countriesStats.sheetExport.tableColumns.activeCases") },
+      {
+        name: t("countriesStats.sheetExport.tableColumns.totalDeathsPer1M"),
+      },
+      { name: t("countriesStats.sheetExport.tableColumns.newCases") },
+      { name: t("countriesStats.sheetExport.tableColumns.newDeaths") },
+      {
+        name: t("countriesStats.sheetExport.tableColumns.seriousCritical"),
+      },
+      { name: t("countriesStats.sheetExport.tableColumns.totalCases") },
+      {
+        name: t("countriesStats.sheetExport.tableColumns.totalCasesPer1M"),
+      },
+      { name: t("countriesStats.sheetExport.tableColumns.totalDeaths") },
+      {
+        name: t("countriesStats.sheetExport.tableColumns.totalRecovered"),
+      },
+    ],
+    rows: [
+      convertToNumber(modalRecord.value.active_cases),
+      convertToNumber(modalRecord.value.deaths_per_1m_population),
+      convertToNumber(modalRecord.value.new_cases),
+      convertToNumber(modalRecord.value.new_deaths),
+      convertToNumber(modalRecord.value.serious_critical),
+      convertToNumber(modalRecord.value.cases),
+      convertToNumber(modalRecord.value.total_cases_per_1m_population),
+      convertToNumber(modalRecord.value.deaths),
+      convertToNumber(modalRecord.value.total_recovered),
+    ],
+    timeStamp: timeStamp.value,
+    chartCell: t("countriesStats.sheetExport.chartCell"),
+    filename: `${modalRecord.value.country_name}`,
+  };
+  exportExcel(data);
+}
 </script>
