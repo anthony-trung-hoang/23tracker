@@ -11,6 +11,13 @@ const store = useWorldDataStore();
 const cardTitles = ref("");
 const timeStamp = ref("");
 
+function convertToNumber(str) {
+  if (!str) return 0;
+  if (str === "N/A") return -1;
+  str = str.replace(/,/g, "");
+  return parseInt(str);
+}
+
 const cardContent = computed(() => store.worldStatistics);
 
 watchEffect(() => {
@@ -38,7 +45,49 @@ watchEffect(() => {
 });
 
 function exportFile() {
-  exportExcel();
+  let data = {
+    sheetTitle: t("worldData.sheetExport.sheetTitle"),
+    titleCell: t("worldData.sheetExport.titleCell"),
+    script:
+      t("worldData.sheetExport.script1") +
+      timeStamp.value +
+      t("worldData.sheetExport.script2"),
+    desCell: t("worldData.sheetExport.desCell"),
+    columns: [
+      { name: t("worldData.sheetExport.tableColumns.activeCases") },
+      {
+        name: t("worldData.sheetExport.tableColumns.totalDeathsPer1M"),
+      },
+      { name: t("worldData.sheetExport.tableColumns.newCases") },
+      { name: t("worldData.sheetExport.tableColumns.newDeaths") },
+      {
+        name: t("worldData.sheetExport.tableColumns.seriousCritical"),
+      },
+      { name: t("worldData.sheetExport.tableColumns.totalCases") },
+      {
+        name: t("worldData.sheetExport.tableColumns.totalCasesPer1M"),
+      },
+      { name: t("worldData.sheetExport.tableColumns.totalDeaths") },
+      {
+        name: t("worldData.sheetExport.tableColumns.totalRecovered"),
+      },
+    ],
+    rows: [
+      convertToNumber(cardContent.value.active_cases),
+      convertToNumber(cardContent.value.deaths_per_1m_population),
+      convertToNumber(cardContent.value.new_cases),
+      convertToNumber(cardContent.value.new_deaths),
+      convertToNumber(cardContent.value.serious_critical),
+      convertToNumber(cardContent.value.total_cases),
+      convertToNumber(cardContent.value.total_cases_per_1m_population),
+      convertToNumber(cardContent.value.total_deaths),
+      convertToNumber(cardContent.value.total_recovered),
+    ],
+    timeStamp: timeStamp.value,
+    chartCell: t("worldData.sheetExport.chartCell"),
+    filename: "world-statistics",
+  };
+  exportExcel(data);
 }
 </script>
 
