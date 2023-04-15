@@ -3,7 +3,7 @@ import CardItem from "./items/CardItem.vue";
 import { useWorldDataStore } from "../stores/worldData";
 import { useImageStore } from "../stores/image";
 import { useI18n } from "vue-i18n";
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, inject } from "vue";
 import { computed } from "@vue/reactivity";
 import { exportExcel } from "../services/exportExcelService";
 
@@ -47,51 +47,57 @@ watchEffect(() => {
   timeStamp.value = cardContent.value.statistic_taken_at;
 });
 
+const emitter = inject("emitter");
+
 function exportFile() {
-  let data = {
-    sheetTitle: t("worldData.sheetExport.sheetTitle"),
-    titleCell: t("worldData.sheetExport.titleCell"),
-    script:
-      t("worldData.sheetExport.script1") +
-      timeStamp.value +
-      t("worldData.sheetExport.script2"),
-    desCell: t("worldData.sheetExport.desCell"),
-    columns: [
-      { name: t("worldData.sheetExport.tableColumns.activeCases") },
-      {
-        name: t("worldData.sheetExport.tableColumns.totalDeathsPer1M"),
-      },
-      { name: t("worldData.sheetExport.tableColumns.newCases") },
-      { name: t("worldData.sheetExport.tableColumns.newDeaths") },
-      {
-        name: t("worldData.sheetExport.tableColumns.seriousCritical"),
-      },
-      { name: t("worldData.sheetExport.tableColumns.totalCases") },
-      {
-        name: t("worldData.sheetExport.tableColumns.totalCasesPer1M"),
-      },
-      { name: t("worldData.sheetExport.tableColumns.totalDeaths") },
-      {
-        name: t("worldData.sheetExport.tableColumns.totalRecovered"),
-      },
-    ],
-    rows: [
-      convertToNumber(cardContent.value.active_cases),
-      convertToNumber(cardContent.value.deaths_per_1m_population),
-      convertToNumber(cardContent.value.new_cases),
-      convertToNumber(cardContent.value.new_deaths),
-      convertToNumber(cardContent.value.serious_critical),
-      convertToNumber(cardContent.value.total_cases),
-      convertToNumber(cardContent.value.total_cases_per_1m_population),
-      convertToNumber(cardContent.value.total_deaths),
-      convertToNumber(cardContent.value.total_recovered),
-    ],
-    base64Image: base64Image.value,
-    timeStamp: timeStamp.value,
-    chartCell: t("worldData.sheetExport.chartCell"),
-    filename: "world-statistics",
-  };
-  exportExcel(data);
+  emitter.emit("capture-image");
+
+  setTimeout(() => {
+    let data = {
+      sheetTitle: t("worldData.sheetExport.sheetTitle"),
+      titleCell: t("worldData.sheetExport.titleCell"),
+      script:
+        t("worldData.sheetExport.script1") +
+        timeStamp.value +
+        t("worldData.sheetExport.script2"),
+      desCell: t("worldData.sheetExport.desCell"),
+      columns: [
+        { name: t("worldData.sheetExport.tableColumns.activeCases") },
+        {
+          name: t("worldData.sheetExport.tableColumns.totalDeathsPer1M"),
+        },
+        { name: t("worldData.sheetExport.tableColumns.newCases") },
+        { name: t("worldData.sheetExport.tableColumns.newDeaths") },
+        {
+          name: t("worldData.sheetExport.tableColumns.seriousCritical"),
+        },
+        { name: t("worldData.sheetExport.tableColumns.totalCases") },
+        {
+          name: t("worldData.sheetExport.tableColumns.totalCasesPer1M"),
+        },
+        { name: t("worldData.sheetExport.tableColumns.totalDeaths") },
+        {
+          name: t("worldData.sheetExport.tableColumns.totalRecovered"),
+        },
+      ],
+      rows: [
+        convertToNumber(cardContent.value.active_cases),
+        convertToNumber(cardContent.value.deaths_per_1m_population),
+        convertToNumber(cardContent.value.new_cases),
+        convertToNumber(cardContent.value.new_deaths),
+        convertToNumber(cardContent.value.serious_critical),
+        convertToNumber(cardContent.value.total_cases),
+        convertToNumber(cardContent.value.total_cases_per_1m_population),
+        convertToNumber(cardContent.value.total_deaths),
+        convertToNumber(cardContent.value.total_recovered),
+      ],
+      base64Image: base64Image.value,
+      timeStamp: timeStamp.value,
+      chartCell: t("worldData.sheetExport.chartCell"),
+      filename: "world-statistics",
+    };
+    exportExcel(data);
+  }, 2000);
 }
 </script>
 

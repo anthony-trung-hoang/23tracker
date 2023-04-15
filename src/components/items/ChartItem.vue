@@ -5,12 +5,12 @@
     :options="chartOptions"
     :data="chartData"
   />
-  <button @click="downloadChartImage">Tải xuống</button>
 </template>
 
 <script setup>
 import { Bar } from "vue-chartjs";
 import html2canvas from "html2canvas";
+import { inject } from "vue";
 
 import {
   Chart as ChartJS,
@@ -51,6 +51,10 @@ const chartOptions = ref({
   },
 });
 
+const emitter = inject("emitter");
+emitter.on("capture-image", () => {
+  downloadChartImage();
+});
 const downloadChartImage = () => {
   const chartElement = document.getElementById(props.chartId);
   html2canvas(chartElement).then(function (canvas) {

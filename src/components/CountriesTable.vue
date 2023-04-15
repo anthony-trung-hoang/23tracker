@@ -117,7 +117,7 @@
 <script setup>
 import { SearchOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, inject } from "vue";
 import { useImageStore } from "../stores/image";
 import { useWorldDataStore } from "../stores/worldData";
 import { computed } from "@vue/reactivity";
@@ -367,51 +367,55 @@ const handleReset = (clearFilters) => {
 
 // excel export (through button in the modal)
 const base64Image = computed(() => imageStore.chartImage);
+const emitter = inject("emitter");
 
 function exportFile() {
-  let data = {
-    sheetTitle: `${modalRecord.value.country_name} sheet`,
-    titleCell: modalRecord.value.country_name,
-    script:
-      t("countriesStats.sheetExport.script1") +
-      timeStamp.value +
-      t("countriesStats.sheetExport.script2"),
-    desCell: t("countriesStats.sheetExport.desCell"),
-    columns: [
-      { name: t("countriesStats.sheetExport.tableColumns.activeCases") },
-      {
-        name: t("countriesStats.sheetExport.tableColumns.totalDeathsPer1M"),
-      },
-      { name: t("countriesStats.sheetExport.tableColumns.newCases") },
-      { name: t("countriesStats.sheetExport.tableColumns.newDeaths") },
-      {
-        name: t("countriesStats.sheetExport.tableColumns.seriousCritical"),
-      },
-      { name: t("countriesStats.sheetExport.tableColumns.totalCases") },
-      {
-        name: t("countriesStats.sheetExport.tableColumns.totalCasesPer1M"),
-      },
-      { name: t("countriesStats.sheetExport.tableColumns.totalDeaths") },
-      {
-        name: t("countriesStats.sheetExport.tableColumns.totalRecovered"),
-      },
-    ],
-    rows: [
-      convertToNumber(modalRecord.value.active_cases),
-      convertToNumber(modalRecord.value.deaths_per_1m_population),
-      convertToNumber(modalRecord.value.new_cases),
-      convertToNumber(modalRecord.value.new_deaths),
-      convertToNumber(modalRecord.value.serious_critical),
-      convertToNumber(modalRecord.value.cases),
-      convertToNumber(modalRecord.value.total_cases_per_1m_population),
-      convertToNumber(modalRecord.value.deaths),
-      convertToNumber(modalRecord.value.total_recovered),
-    ],
-    base64Image: base64Image.value,
-    timeStamp: timeStamp.value,
-    chartCell: t("countriesStats.sheetExport.chartCell"),
-    filename: `${modalRecord.value.country_name}`,
-  };
-  exportExcel(data);
+  emitter.emit("capture-image");
+  setTimeout(() => {
+    let data = {
+      sheetTitle: `${modalRecord.value.country_name} sheet`,
+      titleCell: modalRecord.value.country_name,
+      script:
+        t("countriesStats.sheetExport.script1") +
+        timeStamp.value +
+        t("countriesStats.sheetExport.script2"),
+      desCell: t("countriesStats.sheetExport.desCell"),
+      columns: [
+        { name: t("countriesStats.sheetExport.tableColumns.activeCases") },
+        {
+          name: t("countriesStats.sheetExport.tableColumns.totalDeathsPer1M"),
+        },
+        { name: t("countriesStats.sheetExport.tableColumns.newCases") },
+        { name: t("countriesStats.sheetExport.tableColumns.newDeaths") },
+        {
+          name: t("countriesStats.sheetExport.tableColumns.seriousCritical"),
+        },
+        { name: t("countriesStats.sheetExport.tableColumns.totalCases") },
+        {
+          name: t("countriesStats.sheetExport.tableColumns.totalCasesPer1M"),
+        },
+        { name: t("countriesStats.sheetExport.tableColumns.totalDeaths") },
+        {
+          name: t("countriesStats.sheetExport.tableColumns.totalRecovered"),
+        },
+      ],
+      rows: [
+        convertToNumber(modalRecord.value.active_cases),
+        convertToNumber(modalRecord.value.deaths_per_1m_population),
+        convertToNumber(modalRecord.value.new_cases),
+        convertToNumber(modalRecord.value.new_deaths),
+        convertToNumber(modalRecord.value.serious_critical),
+        convertToNumber(modalRecord.value.cases),
+        convertToNumber(modalRecord.value.total_cases_per_1m_population),
+        convertToNumber(modalRecord.value.deaths),
+        convertToNumber(modalRecord.value.total_recovered),
+      ],
+      base64Image: base64Image.value,
+      timeStamp: timeStamp.value,
+      chartCell: t("countriesStats.sheetExport.chartCell"),
+      filename: `${modalRecord.value.country_name}`,
+    };
+    exportExcel(data);
+  }, 2000);
 }
 </script>

@@ -6,10 +6,11 @@ import router from "./router";
 import { createI18n } from "vue-i18n";
 import en from "./lang/en.json";
 import vi from "./lang/vi.json";
-
 import "ant-design-vue/dist/antd.css";
 import "./assets/main.css";
+import mitt from "mitt"; // Import mitt
 
+const emitter = mitt();
 const messages = {
   en,
   vi,
@@ -24,6 +25,7 @@ const i18n = createI18n({
 
 const app = createApp(App);
 
+app.provide("emitter", emitter);
 app.use(Antd);
 app.use(createPinia());
 app.use(router);
