@@ -30,7 +30,7 @@ export function exportExcel(exportData) {
     // this.worldStatistics.statistic_taken_at +
     // this.$t("vietnamData.sheetExport.script2") +
     exportData.script +
-    `${date}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
   timeStampCell.alignment = { vertical: "middle", horizontal: "center" };
   timeStampCell.font = {
     name: "Arial",
@@ -105,11 +105,11 @@ export function exportExcel(exportData) {
   };
   chartCell.alignment = { vertical: "middle", horizontal: "center" };
 
-  // const imageId = workbook.addImage({
-  //   base64: this.vietnamChartImage,
-  //   extension: "png",
-  // });
-  // worksheet.addImage(imageId, "B14:H30");
+  const imageId = workbook.addImage({
+    base64: exportData.base64Image,
+    extension: "png",
+  });
+  worksheet.addImage(imageId, "B14:H30");
 
   // export file
   const timeStamp = exportData.timeStamp;

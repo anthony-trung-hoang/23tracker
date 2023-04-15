@@ -1,6 +1,7 @@
 <script setup>
 import CardItem from "./items/CardItem.vue";
 import { useWorldDataStore } from "../stores/worldData";
+import { useImageStore } from "../stores/image";
 import { useI18n } from "vue-i18n";
 import { ref, watchEffect } from "vue";
 import { computed } from "@vue/reactivity";
@@ -8,6 +9,7 @@ import { exportExcel } from "../services/exportExcelService";
 
 const { t } = useI18n();
 const store = useWorldDataStore();
+const imageStore = useImageStore();
 const cardTitles = ref("");
 const timeStamp = ref("");
 
@@ -19,6 +21,7 @@ function convertToNumber(str) {
 }
 
 const cardContent = computed(() => store.worldStatistics);
+const base64Image = computed(() => imageStore.chartImage);
 
 watchEffect(() => {
   cardTitles.value = [
@@ -83,6 +86,7 @@ function exportFile() {
       convertToNumber(cardContent.value.total_deaths),
       convertToNumber(cardContent.value.total_recovered),
     ],
+    base64Image: base64Image.value,
     timeStamp: timeStamp.value,
     chartCell: t("worldData.sheetExport.chartCell"),
     filename: "world-statistics",

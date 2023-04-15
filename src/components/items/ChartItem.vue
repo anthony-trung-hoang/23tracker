@@ -5,10 +5,13 @@
     :options="chartOptions"
     :data="chartData"
   />
+  <button @click="downloadChartImage">Tải xuống</button>
 </template>
 
 <script setup>
 import { Bar } from "vue-chartjs";
+import html2canvas from "html2canvas";
+
 import {
   Chart as ChartJS,
   Title,
@@ -18,7 +21,8 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
+import { useImageStore } from "../../stores/image";
 
 ChartJS.register(
   Title,
@@ -45,4 +49,13 @@ const chartOptions = ref({
     padding: 20,
   },
 });
+
+const downloadChartImage = () => {
+  const chartElement = document.getElementById("my-chart-id");
+  html2canvas(chartElement).then(function (canvas) {
+    const imageDataURL = canvas.toDataURL();
+    const imageStore = useImageStore();
+    imageStore.saveImage(imageDataURL);
+  });
+};
 </script>
