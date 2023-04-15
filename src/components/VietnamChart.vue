@@ -19,6 +19,7 @@ function convertToNumber(str) {
 const vietnamData = computed(() => store.vietNamStatistics);
 
 // initial data for chart data
+const vietnam_chart = "vietnam_chart";
 const chartData = ref({
   labels: [
     t("worldChart.totalCases"),
@@ -74,6 +75,6 @@ watchEffect(() => {
     <h2 style="font-size: 25px; padding: 6px 6px">
       {{ t("vietnamChart.vietnamBarplot") }}
     </h2>
-    <ChartItem :chartData="chartData"></ChartItem>
+    <ChartItem :chartData="chartData" :chartId="vietnam_chart"></ChartItem>
   </div>
 </template>

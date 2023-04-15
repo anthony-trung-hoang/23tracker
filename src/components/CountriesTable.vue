@@ -106,8 +106,9 @@
     :footer="null"
     :maskClosable="true"
     :maskStyle="{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }"
+    :destroyOnClose="true"
   >
-    <ChartItem :chartData="chartData"></ChartItem>
+    <ChartItem :chartData="chartData" :chartId="country_chart"></ChartItem>
     <a-button block type="primary" @click="exportFile">
       {{ t("countriesStats.countriesTable.downloadExcelButton") }}
     </a-button>
@@ -117,6 +118,7 @@
 import { SearchOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
 import { ref, watchEffect } from "vue";
+import { useImageStore } from "../stores/image";
 import { useWorldDataStore } from "../stores/worldData";
 import { computed } from "@vue/reactivity";
 import ChartItem from "./items/ChartItem.vue";
@@ -142,6 +144,7 @@ let compare = (a, b) => {
 };
 
 const store = useWorldDataStore();
+const imageStore = useImageStore();
 const { t } = useI18n();
 
 // TIME WHEN STATS WAS TAKEN
@@ -176,6 +179,7 @@ const showModal = (record) => {
 };
 
 // initial data for chart data
+const country_chart = "country_chart";
 const chartData = ref({
   labels: [
     t("worldChart.totalCases"),
@@ -362,6 +366,7 @@ const handleReset = (clearFilters) => {
 };
 
 // excel export (through button in the modal)
+const base64Image = computed(() => imageStore.chartImage);
 
 function exportFile() {
   let data = {
@@ -402,6 +407,7 @@ function exportFile() {
       convertToNumber(modalRecord.value.deaths),
       convertToNumber(modalRecord.value.total_recovered),
     ],
+    base64Image: base64Image.value,
     timeStamp: timeStamp.value,
     chartCell: t("countriesStats.sheetExport.chartCell"),
     filename: `${modalRecord.value.country_name}`,

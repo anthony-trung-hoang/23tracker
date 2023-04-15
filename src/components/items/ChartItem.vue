@@ -1,7 +1,7 @@
 <template>
   <Bar
     style="background-color: white"
-    id="my-chart-id"
+    :id="chartId"
     :options="chartOptions"
     :data="chartData"
   />
@@ -35,6 +35,7 @@ ChartJS.register(
 
 const props = defineProps({
   chartData: Object,
+  chartId: String,
 });
 
 const chartOptions = ref({
@@ -51,7 +52,7 @@ const chartOptions = ref({
 });
 
 const downloadChartImage = () => {
-  const chartElement = document.getElementById("my-chart-id");
+  const chartElement = document.getElementById(props.chartId);
   html2canvas(chartElement).then(function (canvas) {
     const imageDataURL = canvas.toDataURL();
     const imageStore = useImageStore();
