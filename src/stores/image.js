@@ -6,7 +6,6 @@ export const useImageStore = defineStore("image", () => {
   async function saveImage(base64Image) {
     try {
       chartImage.value = base64Image;
-      console.log("Đã lưu");
     } catch (error) {
       console.log(error);
     }

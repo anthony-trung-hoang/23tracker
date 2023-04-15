@@ -54,9 +54,6 @@ export function exportExcel(exportData) {
   };
 
   // Init table data
-
-  console.log(exportData);
-
   let table = {
     name: "MyTable",
     ref: "A10",

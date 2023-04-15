@@ -416,6 +416,6 @@ function exportFile() {
       filename: `${modalRecord.value.country_name}`,
     };
     exportExcel(data);
-  }, 2000);
+  }, 1000);
 }
 </script>
